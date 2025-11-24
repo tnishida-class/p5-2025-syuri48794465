@@ -3,8 +3,7 @@ let vx, vy;
 let size
 const g = 1;
 let snow=[]
-let count
-let speed = 1;
+
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
