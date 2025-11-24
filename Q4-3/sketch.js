@@ -43,12 +43,19 @@ function draw(){
     }
   }
   balls = ballsInCanvas; // 画面内のボールだけを残す
+  text(balls.length, 100, 100)
+  
 
   // 補足：filter 関数を使うともっと簡単に書ける
-  // balls = balls.filter(insideCanvas);
+ // balls = balls.filter(insideCanvas);
 
-  if(frameCount % 20 === 0) { // 20フレームごとに新しい的を追加する
-    // BLANK[1] 新しい的オブジェクトを作成して targets 配列に追加しよう
+  if(frameCount % 20 == 0){ // 20フレームごとに新しい的を追加する
+    const dx = random(-5,5)
+    const dy = random(-5,5)
+    const b = { x: windowWidth/2, y: windowHeight/2, vx: dx, vy: dy, size: 5};
+    //let c = {x: 10, y: 10, vx: 1, vy: 1, size: 1};
+    targets.push(b);
+  //BLANK[1] 新しい的オブジェクトを作成して targets 配列に追加しよう
   }
 
   // ボールに当たった or 大きくなりすぎた的を配列から削除する
@@ -59,9 +66,12 @@ function draw(){
       let hit = false;
       for(let j = 0; j < balls.length; j++){ // すべてのボールと衝突判定
         let b = balls[j];
-        // BLANK[2]
+        if(b.x*b.x-2*b.x*t.x+t.x*t.x+b.y*b.y-2*b.y*t.y+t.y*t.y<t.size*t.size/4+t.size*b.size+b.size*b.size/4){
+          hit=true
+        }// BLANK[2]
       }
-      if(!hit) activeTargets.push(t); // 衝突していなければ生き残る
+     // 衝突していなければ生き残る
+    if(!hit){ activeTargets.push(t)}
     }
   }
   targets = activeTargets; // 生き残った的だけを残す
