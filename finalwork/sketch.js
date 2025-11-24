@@ -12,7 +12,6 @@ function setup(){
   size=height*0.2
   vx = 0;
   vy = 0;
-  count = (count + speed)
 }
 
 function windowResized(){
