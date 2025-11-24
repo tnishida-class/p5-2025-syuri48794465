@@ -7,8 +7,8 @@ let snow=[]
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
-  x = width / 2;
-  y = height / 2;
+  x = width / 2
+  y = height / 2
   size=height*0.2
   vx = 0;
   vy = 0;
