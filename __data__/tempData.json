@@ -2024,6 +2024,81 @@
           ]
         }
       }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/24/2025, 11:23:09 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "let x, y;\r\nlet vx, vy;\r\nlet size\r\nconst g = 1;\r\nlet snow=[]\r\n\r\n\r\nfunction setup(){\r\n  createCanvas(windowWidth, windowHeight);\r\n  x = width / 2\r\n  y = height / 2\r\n  size=height*0.2\r\n  vx = 0;\r\n  vy = 0;\r\n}\r\n\r\nfunction windowResized(){\r\n  resizeCanvas(windowWidth, windowHeight);\r\n\r\n}\r\n\r\nfunction draw(){\r\n  background(246,246,246);\r\n  \r\n  //snowfall\r\n  for(let i = 0; i < snow.length; i++){\r\n    let t = snow[i];\r\n    fill(255);\r\n    ellipse(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n\r\n   // 重力とジャンプ\r\n   if(y<windowHeight-size*0.5){ vy+=g}\r\n  else{\r\n    vy=0\r\n    if(keyIsDown(\" \".charCodeAt(0))){ \r\n    vy-=20}\r\n  }\r\n    \r\n  \r\n  // 制限\r\n  vx = constrain(vx, -20, 20);\r\n  vy = constrain(vy, -20, 20);\r\n\r\n  // 位置を更新\r\n  x += vx;\r\n  y += vy;\r\n\r\n  //snowman\r\n  fill(255);\r\n  ellipse(x, y, size, size);\r\n  ellipse(x,y-size*0.8,size*0.8)\r\n  fill(200,7,7)\r\n  rect(x+size*0.1,y-size*0.5,size*0.2,size*0.5,20)\r\n  ellipse(x,y-size*0.45,size*0.7,size*0.2)\r\n  ellipse(x,y-size*0.75,size*0.15,size*0.1)\r\n  fill(0)\r\n  ellipse(x-size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x+size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x,y-size*0.2,size*0.1)\r\n  ellipse(x,y,size*0.1) \r\n\r\n// snowfall\r\nif(frameCount % 10 == 0){ \r\n    const a=random(0,3)\r\n    const dx = random(-1,1)\r\n    const dy = random(2,4)\r\n    const b = { x:windowWidth/a , y: 0, vx: dx, vy: dy, size: 10};\r\n    snow.push(b);\r\n    }\r\n\r\n//\r\nif(size<height*0.8&&y>windowHeight-size*0.5){ \r\n    size+=0.2\r\n}\r\nelse{size=height*0.2}\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/25/2025, 9:39:03 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "// EUの旗を描いてみよう\r\nfunction setup(){\r\n  createCanvas(200, 200);\r\n  background(192);\r\n  noStroke();\r\n  for(let i = 0; i < 12; i++){\r\n    const theta = TWO_PI * i / 12;\r\n    const x = 100 + cos(theta) * 50;\r\n    const y = 100 + sin(theta) * 50;\r\n    star(x, y, 10);\r\n  }\r\n}\r\n\r\n// BLANK[1] ヒント：star 関数をここにコピーして、 draw 内で ellipse の代わりに使おう\r\nfunction star(cx, cy, r){\r\n  beginShape();    // 点つなぎを始める\r\n  for(let i = 0; i < 5; i++){\r\n    const theta = TWO_PI * i * 2 / 5 - HALF_PI;\r\n    const x = cx + cos(theta) * r;\r\n    const y = cy + sin(theta) * r;\r\n    vertex(x, y);  // 次につなぐ点を１つ増やす\r\n  }\r\n  endShape(CLOSE); // 点つなぎを終わる\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/25/2025, 9:39:07 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "let x, y;\r\nlet vx, vy;\r\nlet size\r\nconst g = 1;\r\nlet snow=[]\r\n\r\n\r\nfunction setup(){\r\n  createCanvas(windowWidth, windowHeight);\r\n  x = width / 2\r\n  y = height / 2\r\n  size=height*0.2\r\n  vx = 0;\r\n  vy = 0;\r\n}\r\n\r\nfunction windowResized(){\r\n  resizeCanvas(windowWidth, windowHeight);\r\n\r\n}\r\n\r\nfunction draw(){\r\n  background(246,246,246);\r\n  \r\n  //snowfall\r\n  for(let i = 0; i < snow.length; i++){\r\n    let t = snow[i];\r\n    fill(255);\r\n    ellipse(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n//star\r\n  for(let i = 0; i < stars.length; i++){\r\n    let t = snow[i];\r\n    fill(255);\r\n    star(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n\r\n   // 重力とジャンプ\r\n   if(y<windowHeight-size*0.5){ vy+=g}\r\n  else{\r\n    vy=0\r\n    if(keyIsDown(\" \".charCodeAt(0))){ \r\n    vy-=20}\r\n  }\r\n    \r\n  \r\n  // 制限\r\n  vx = constrain(vx, -20, 20);\r\n  vy = constrain(vy, -20, 20);\r\n\r\n  // 位置を更新\r\n  x += vx;\r\n  y += vy;\r\n\r\n  //snowman\r\n  fill(255);\r\n  ellipse(x, y, size, size);\r\n  ellipse(x,y-size*0.8,size*0.8)\r\n  fill(200,7,7)\r\n  rect(x+size*0.1,y-size*0.5,size*0.2,size*0.5,20)\r\n  ellipse(x,y-size*0.45,size*0.7,size*0.2)\r\n  ellipse(x,y-size*0.75,size*0.15,size*0.1)\r\n  fill(0)\r\n  ellipse(x-size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x+size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x,y-size*0.2,size*0.1)\r\n  ellipse(x,y,size*0.1) \r\n\r\n// snowfall\r\nif(frameCount % 10 == 0){ \r\n    const a=random(0,3)\r\n    const dx = random(-1,1)\r\n    const dy = random(2,4)\r\n    const b = { x:windowWidth/a , y: 0, vx: dx, vy: dy, size: 10};\r\n    snow.push(b);\r\n    }\r\n//\r\nif(frameCount % 10 == 0){ \r\n    const p=random(0,3)\r\n    const sx = random(-1,1)\r\n    const ty = random(2,4)\r\n    const c = { x:windowWidth/p , y: 0, vx: sx, vy: ty, size: 10};\r\n    stars.push(c);\r\n    }\r\n//\r\nif(size<height*0.8&&y>windowHeight-size*0.5){ \r\n    size+=0.2\r\n}\r\nelse{size=height*0.2}\r\n}\r\n\r\nfunction star(cx, cy, r){\r\n  beginShape();    // 点つなぎを始める\r\n  for(let i = 0; i < 5; i++){\r\n    const theta = TWO_PI * i * 2 / 5 - HALF_PI;\r\n    const x = cx + cos(theta) * r;\r\n    const y = cy + sin(theta) * r;\r\n    vertex(x, y);  // 次につなぐ点を１つ増やす\r\n  }\r\n  endShape(CLOSE); // 点つなぎを終わる\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/25/2025, 9:41:38 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "let x, y;\r\nlet vx, vy;\r\nlet size\r\nconst g = 1;\r\nlet snow=[]\r\nlet stars=[]\r\n\r\n\r\nfunction setup(){\r\n  createCanvas(windowWidth, windowHeight);\r\n  x = width / 2\r\n  y = height / 2\r\n  size=height*0.2\r\n  vx = 0;\r\n  vy = 0;\r\n}\r\n\r\nfunction windowResized(){\r\n  resizeCanvas(windowWidth, windowHeight);\r\n\r\n}\r\n\r\nfunction star(cx, cy, r){\r\n  beginShape();    \r\n  for(let i = 0; i < 5; i++){\r\n    const theta = TWO_PI * i * 2 / 5 - HALF_PI;\r\n    const x = cx + cos(theta) * r;\r\n    const y = cy + sin(theta) * r;\r\n    vertex(x, y);  \r\n  }\r\n  endShape(CLOSE); \r\n}\r\n\r\nfunction draw(){\r\n  background(246,246,246);\r\n  \r\n  //snowfall\r\n  for(let i = 0; i < snow.length; i++){\r\n    let t = snow[i];\r\n    fill(255);\r\n    ellipse(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n//star\r\n  for(let i = 0; i < stars.length; i++){\r\n    let t = stars[i];\r\n    fill(255);\r\n    star(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n\r\n   // 重力とジャンプ\r\n   if(y<windowHeight-size*0.5){ vy+=g}\r\n  else{\r\n    vy=0\r\n    if(keyIsDown(\" \".charCodeAt(0))){ \r\n    vy-=20}\r\n  }\r\n    \r\n  \r\n  // 制限\r\n  vx = constrain(vx, -20, 20);\r\n  vy = constrain(vy, -20, 20);\r\n\r\n  // 位置を更新\r\n  x += vx;\r\n  y += vy;\r\n\r\n  //snowman\r\n  fill(255);\r\n  ellipse(x, y, size, size);\r\n  ellipse(x,y-size*0.8,size*0.8)\r\n  fill(200,7,7)\r\n  rect(x+size*0.1,y-size*0.5,size*0.2,size*0.5,20)\r\n  ellipse(x,y-size*0.45,size*0.7,size*0.2)\r\n  ellipse(x,y-size*0.75,size*0.15,size*0.1)\r\n  fill(0)\r\n  ellipse(x-size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x+size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x,y-size*0.2,size*0.1)\r\n  ellipse(x,y,size*0.1) \r\n\r\n// snowfall\r\nif(frameCount % 10 == 0){ \r\n    const a=random(0,3)\r\n    const dx = random(-1,1)\r\n    const dy = random(2,4)\r\n    const b = { x:windowWidth/a , y: 0, vx: dx, vy: dy, size: 10};\r\n    snow.push(b);\r\n    }\r\n//\r\nif(frameCount % 60 == 0){ \r\n    const p=random(0,3)\r\n    const sx = random(-1,1)\r\n    const ty = random(2,4) \r\n    const c = { x:windowWidth/p , y: 0, vx: sx, vy: ty, size: 10};\r\n    stars.push(c);\r\n    }\r\n//\r\nif(size<height*0.8&&y>windowHeight-size*0.5){ \r\n    size+=0.2\r\n}\r\nelse{size=height*0.2}\r\n}\r\n\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/25/2025, 9:44:05 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "let x, y;\r\nlet vx, vy;\r\nlet size\r\nconst g = 1;\r\nlet snow=[]\r\nlet stars=[]\r\n\r\n\r\nfunction setup(){\r\n  createCanvas(windowWidth, windowHeight);\r\n  x = width / 2\r\n  y = height / 2\r\n  size=height*0.2\r\n  vx = 0;\r\n  vy = 0;\r\n}\r\n\r\nfunction windowResized(){\r\n  resizeCanvas(windowWidth, windowHeight);\r\n\r\n}\r\n\r\nfunction star(cx, cy, r){\r\n  beginShape();    \r\n  for(let i = 0; i < 7; i++){\r\n    const theta = TWO_PI * i * 2 / 7 - HALF_PI;\r\n    const x = cx + cos(theta) * r;\r\n    const y = cy + sin(theta) * r;\r\n    vertex(x, y);  \r\n  }\r\n  endShape(CLOSE); \r\n}\r\n\r\nfunction draw(){\r\n  background(246,246,246);\r\n  \r\n  //snowfall\r\n  for(let i = 0; i < snow.length; i++){\r\n    let t = snow[i];\r\n    fill(255);\r\n    ellipse(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n//star\r\n  for(let i = 0; i < stars.length; i++){\r\n    let t = stars[i];\r\n    fill(255);\r\n    star(t.x, t.y, t.size);\r\n    t.x += t.vx;\r\n    t.y += t.vy;\r\n  }\r\n\r\n   // 重力とジャンプ\r\n   if(y<windowHeight-size*0.5){ vy+=g}\r\n  else{\r\n    vy=0\r\n    if(keyIsDown(\" \".charCodeAt(0))){ \r\n    vy-=20}\r\n  }\r\n    \r\n  \r\n  // 制限\r\n  vx = constrain(vx, -20, 20);\r\n  vy = constrain(vy, -20, 20);\r\n\r\n  // 位置を更新\r\n  x += vx;\r\n  y += vy;\r\n\r\n  //snowman\r\n  fill(255);\r\n  ellipse(x, y, size, size);\r\n  ellipse(x,y-size*0.8,size*0.8)\r\n  fill(200,7,7)\r\n  rect(x+size*0.1,y-size*0.5,size*0.2,size*0.5,20)\r\n  ellipse(x,y-size*0.45,size*0.7,size*0.2)\r\n  ellipse(x,y-size*0.75,size*0.15,size*0.1)\r\n  fill(0)\r\n  ellipse(x-size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x+size*0.2,y-size*0.8,size*0.1)\r\n  ellipse(x,y-size*0.2,size*0.1)\r\n  ellipse(x,y,size*0.1) \r\n\r\n// snowfall\r\nif(frameCount % 10 == 0){ \r\n    const a=random(0,3)\r\n    const dx = random(-1,1)\r\n    const dy = random(2,4)\r\n    const b = { x:windowWidth/a , y: 0, vx: dx, vy: dy, size: 10};\r\n    snow.push(b);\r\n    }\r\n//\r\nif(frameCount % 60 == 0){ \r\n    const p=random(0,3)\r\n    const sx = random(-1,1)\r\n    const ty = random(2,4) \r\n    const c = { x:windowWidth/p , y: 0, vx: sx, vy: ty, size: 10};\r\n    stars.push(c);\r\n    }\r\n//\r\nif(size<height*0.8&&y>windowHeight-size*0.5){ \r\n    size+=0.2\r\n}\r\nelse{size=height*0.2}\r\n}\r\n\r\n\r\n"
+            }
+          ]
+        }
+      }
     }
   ]
 }

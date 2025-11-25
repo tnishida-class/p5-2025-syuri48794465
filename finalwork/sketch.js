@@ -3,6 +3,7 @@ let vx, vy;
 let size
 const g = 1;
 let snow=[]
+let stars=[]
 
 
 function setup(){
@@ -18,6 +19,17 @@ function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 
 }
+//関数設定
+function star(cx, cy, r){
+  beginShape();    
+  for(let i = 0; i < 7; i++){
+    const theta = TWO_PI * i * 2 / 7 - HALF_PI;
+    const x = cx + cos(theta) * r;
+    const y = cy + sin(theta) * r;
+    vertex(x, y);  
+  }
+  endShape(CLOSE); 
+}
 
 function draw(){
   background(246,246,246);
@@ -27,6 +39,14 @@ function draw(){
     let t = snow[i];
     fill(255);
     ellipse(t.x, t.y, t.size);
+    t.x += t.vx;
+    t.y += t.vy;
+  }
+//star
+  for(let i = 0; i < stars.length; i++){
+    let t = stars[i];
+    fill(255);
+    star(t.x, t.y, t.size);
     t.x += t.vx;
     t.y += t.vy;
   }
@@ -70,11 +90,19 @@ if(frameCount % 10 == 0){
     const b = { x:windowWidth/a , y: 0, vx: dx, vy: dy, size: 10};
     snow.push(b);
     }
-
+//star
+if(frameCount % 60 == 0){ 
+    const p=random(0,3)
+    const sx = random(-1,1)
+    const ty = random(2,4) 
+    const c = { x:windowWidth/p , y: 0, vx: sx, vy: ty, size: 10};
+    stars.push(c);
+    }
 //
 if(size<height*0.8&&y>windowHeight-size*0.5){ 
     size+=0.2
 }
 else{size=height*0.2}
 }
+
 
