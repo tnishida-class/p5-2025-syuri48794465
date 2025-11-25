@@ -2,7 +2,6 @@
 let x, y;
 let vx, vy;
 const g = 1;
-
 function setup(){
   createCanvas(windowWidth, windowHeight);
   x = width / 2;
@@ -23,11 +22,22 @@ function draw(){
   const groundY = height * 0.8;
   fill(64, 192, 64);
   rect(0, groundY, width, height - groundY);
-
-  // BLANK[1] キャラクターの左右移動
-
-  // BLANK[2] 重力とジャンプ
-
+  
+   // BLANK[2] 重力とジャンプ
+  if(y<groundY-size*0.5){ vy+=g}
+  else{
+    vy=0
+    if(keyIsDown(" ".charCodeAt(0))){ 
+    vy-=20}
+    // BLANK[1] キャラクターの左右移動
+  if(keyIsDown(LEFT_ARROW)){ x -= 5; }
+  if(keyIsDown(RIGHT_ARROW)){ x += 5; }
+  
+  if(keyIsDown("A".charCodeAt(0))){ 
+  if(keyIsDown(LEFT_ARROW)){ x -= 5+1; }
+  if(keyIsDown(RIGHT_ARROW)){ x += 5+1; }
+  }
+  }
   // 速くなりすぎないように制限
   vx = constrain(vx, -20, 20);
   vy = constrain(vy, -20, 20);
